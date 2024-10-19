@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { LoaderButton } from "@/components/loader-button";
+import { LoaderButton } from '@/components/loader-button'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,65 +9,55 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { deleteAccountAction } from "./actions";
-import { useServerAction } from "zsa-react";
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { deleteAccountAction } from './actions'
+import { useServerAction } from 'zsa-react'
 
 export const deleteSchema = z.object({
-  confirm: z.string().refine((v) => v === "Please delete", {
-    message: "Please type 'Please delete' to confirm",
-  }),
-});
+  confirm: z.string().refine((v) => v === 'Please delete', {
+    message: "Please type 'Please delete' to confirm"
+  })
+})
 
 export function DeleteAccountButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false)
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof deleteSchema>>({
     resolver: zodResolver(deleteSchema),
     defaultValues: {
-      confirm: "",
-    },
-  });
-
-  const { execute: deleteAccount, isPending } = useServerAction(
-    deleteAccountAction,
-    {
-      onSuccess: () => {
-        setIsOpen(false);
-        toast({
-          title: "Account Deleted",
-          description: "Your account has been successfully deleted.",
-        });
-      },
-      onError: ({ err }) => {
-        toast({
-          title: "Error",
-          description: err.message || "Failed to delete account.",
-          variant: "destructive",
-        });
-      },
+      confirm: ''
     }
-  );
+  })
+
+  const { execute: deleteAccount, isPending } = useServerAction(deleteAccountAction, {
+    onSuccess: () => {
+      setIsOpen(false)
+      toast({
+        title: 'Account Deleted',
+        description: 'Your account has been successfully deleted.'
+      })
+    },
+    onError: ({ err }) => {
+      toast({
+        title: 'Error',
+        description: err.message || 'Failed to delete account.',
+        variant: 'destructive'
+      })
+    }
+  })
 
   function onSubmit() {
-    deleteAccount();
+    deleteAccount()
   }
 
   return (
@@ -81,9 +71,8 @@ export function DeleteAccountButton() {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            Deleting your account means you will not be able to recover your
-            data in the future. Please type <strong>Please delete</strong> to
-            confirm.
+            Deleting your account means you will not be able to recover your data in the future. Please type{' '}
+            <strong>Please delete</strong> to confirm.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -113,5 +102,5 @@ export function DeleteAccountButton() {
         </Form>
       </AlertDialogContent>
     </AlertDialog>
-  );
+  )
 }

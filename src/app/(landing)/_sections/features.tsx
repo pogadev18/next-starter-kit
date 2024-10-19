@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 import {
   BarChartIcon,
   BlocksIcon,
@@ -18,26 +18,22 @@ import {
   Smartphone,
   SmartphoneNfc,
   SunIcon,
-  UserIcon,
-} from "lucide-react";
+  UserIcon
+} from 'lucide-react'
 
 const techClass =
-  "text-black hover:scale-105 transition hover:rotate-1 shadow-lg shadow-blue-400/50 bg-slate-200 rounded-xl drop-shadow-xl p-4 flex flex-col justify-center items-center";
+  'text-black hover:scale-105 transition hover:rotate-1 shadow-lg shadow-blue-400/50 bg-slate-200 rounded-xl drop-shadow-xl p-4 flex flex-col justify-center items-center'
 
 export function FeaturesSection() {
   return (
-    <section
-      id="features"
-      className="container mx-auto py-24 bg-gray-100 dark:bg-background"
-    >
+    <section id="features" className="container mx-auto py-24 bg-gray-100 dark:bg-background">
       <h2 className="max-w-6xl mx-auto text-6xl text-center mb-12">
         So what&apos;s included in a &quot;modern&quot; starter kit?
       </h2>
 
       <p className="text-center text-2xl max-w-2xl mx-auto mb-12">
-        This code starter kit includes the frameworks, libraries, and tech I use
-        most and believe in to be a great choice in regards to performance, ease
-        of development, and customizability.
+        This code starter kit includes the frameworks, libraries, and tech I use most and believe in to be a great
+        choice in regards to performance, ease of development, and customizability.
       </p>
 
       <ul className="max-w-6xl mx-auto grid grid-cols-3 px-12 leading-10 gap-6">
@@ -109,5 +105,5 @@ export function FeaturesSection() {
         </div>
       </ul>
     </section>
-  );
+  )
 }

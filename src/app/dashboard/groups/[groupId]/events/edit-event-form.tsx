@@ -1,52 +1,32 @@
-"use client";
+'use client'
 
-import { LoaderButton } from "@/components/loader-button";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { useContext, useEffect, useRef, useState } from "react";
-import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  CalendarDays,
-  CalendarIcon,
-  Check,
-  Clock,
-  Terminal,
-} from "lucide-react";
-import { btnIconStyles } from "@/styles/icons";
-import { Textarea } from "@/components/ui/textarea";
-import { editEventAction } from "./actions";
-import { format } from "date-fns";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import { Event } from "@/db/schema";
-import { Label } from "@/components/ui/label";
-import { TimePickerInput } from "@/components/ui/time-picker-input";
-import { Period } from "@/components/ui/time-picker-utils";
-import { TimePeriodSelect } from "@/components/ui/time-period-select";
-import { useServerAction } from "zsa-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ToggleContext } from "@/components/interactive-overlay";
-import {
-  MAX_UPLOAD_IMAGE_SIZE,
-  MAX_UPLOAD_IMAGE_SIZE_IN_MB,
-} from "@/app-config";
-import { formatDate } from "@/util/date";
+import { LoaderButton } from '@/components/loader-button'
+import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { z } from 'zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { CalendarDays, CalendarIcon, Check, Clock, Terminal } from 'lucide-react'
+import { btnIconStyles } from '@/styles/icons'
+import { Textarea } from '@/components/ui/textarea'
+import { editEventAction } from './actions'
+import { format } from 'date-fns'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Calendar } from '@/components/ui/calendar'
+import { Event } from '@/db/schema'
+import { Label } from '@/components/ui/label'
+import { TimePickerInput } from '@/components/ui/time-picker-input'
+import { Period } from '@/components/ui/time-picker-utils'
+import { TimePeriodSelect } from '@/components/ui/time-period-select'
+import { useServerAction } from 'zsa-react'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { ToggleContext } from '@/components/interactive-overlay'
+import { MAX_UPLOAD_IMAGE_SIZE, MAX_UPLOAD_IMAGE_SIZE_IN_MB } from '@/app-config'
+import { formatDate } from '@/util/date'
 
 const editEventSchema = z.object({
   name: z.string().min(1),
@@ -55,50 +35,50 @@ const editEventSchema = z.object({
   file: z
     .instanceof(File)
     .refine((file) => file.size < MAX_UPLOAD_IMAGE_SIZE, {
-      message: `Your image was too large. It must be under ${MAX_UPLOAD_IMAGE_SIZE_IN_MB}MB`,
+      message: `Your image was too large. It must be under ${MAX_UPLOAD_IMAGE_SIZE_IN_MB}MB`
     })
-    .optional(),
-});
+    .optional()
+})
 
 function getPeriod(date: Date) {
-  return date.getHours() >= 12 ? "PM" : "AM";
+  return date.getHours() >= 12 ? 'PM' : 'AM'
 }
 
 export function EditEventForm({ event }: { event: Event }) {
-  const { setIsOpen: setIsOverlayOpen } = useContext(ToggleContext);
-  const { toast } = useToast();
-  const minuteRef = useRef<HTMLInputElement>(null);
-  const hourRef = useRef<HTMLInputElement>(null);
-  const secondRef = useRef<HTMLInputElement>(null);
-  const periodRef = useRef<HTMLButtonElement>(null);
-  const [date, setDate] = useState<Date | undefined>(event.startsOn);
-  const [period, setPeriod] = useState<Period>(getPeriod(event.startsOn));
+  const { setIsOpen: setIsOverlayOpen } = useContext(ToggleContext)
+  const { toast } = useToast()
+  const minuteRef = useRef<HTMLInputElement>(null)
+  const hourRef = useRef<HTMLInputElement>(null)
+  const secondRef = useRef<HTMLInputElement>(null)
+  const periodRef = useRef<HTMLButtonElement>(null)
+  const [date, setDate] = useState<Date | undefined>(event.startsOn)
+  const [period, setPeriod] = useState<Period>(getPeriod(event.startsOn))
 
   const { execute, error, isPending } = useServerAction(editEventAction, {
     onSuccess() {
       toast({
-        title: "Success",
-        description: "Event created successfully.",
-      });
-      setIsOverlayOpen(false);
+        title: 'Success',
+        description: 'Event created successfully.'
+      })
+      setIsOverlayOpen(false)
     },
     onError() {
       toast({
-        title: "Uh oh",
-        variant: "destructive",
-        description: "Something went wrong creating your event.",
-      });
-    },
-  });
+        title: 'Uh oh',
+        variant: 'destructive',
+        description: 'Something went wrong creating your event.'
+      })
+    }
+  })
 
   const form = useForm<z.infer<typeof editEventSchema>>({
     resolver: zodResolver(editEventSchema),
     defaultValues: {
       name: event.name,
       description: event.description,
-      startsOn: event.startsOn,
-    },
-  });
+      startsOn: event.startsOn
+    }
+  })
 
   const onSubmit: SubmitHandler<z.infer<typeof editEventSchema>> = (values) => {
     const newDate = new Date(
@@ -108,11 +88,11 @@ export function EditEventForm({ event }: { event: Event }) {
       date?.getHours() ?? 0,
       date?.getMinutes() ?? 0,
       date?.getSeconds() ?? 0
-    );
+    )
 
-    const formData = new FormData();
+    const formData = new FormData()
     if (values.file) {
-      formData.append("file", values.file);
+      formData.append('file', values.file)
     }
 
     execute({
@@ -120,16 +100,13 @@ export function EditEventForm({ event }: { event: Event }) {
       name: values.name,
       description: values.description,
       startsOn: newDate,
-      fileWrapper: formData,
-    });
-  };
+      fileWrapper: formData
+    })
+  }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 flex-1 px-2"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 flex-1 px-2">
         <FormField
           control={form.control}
           name="name"
@@ -168,17 +145,10 @@ export function EditEventForm({ event }: { event: Event }) {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
-                      className={cn(
-                        "pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
+                      variant={'outline'}
+                      className={cn('pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                     >
-                      {field.value ? (
-                        formatDate(field.value)
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
+                      {field.value ? formatDate(field.value) : <span>Pick a date</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
@@ -189,9 +159,9 @@ export function EditEventForm({ event }: { event: Event }) {
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) => {
-                      const todayMinus1Day = new Date();
-                      todayMinus1Day.setDate(todayMinus1Day.getDate() - 1);
-                      return date < todayMinus1Day;
+                      const todayMinus1Day = new Date()
+                      todayMinus1Day.setDate(todayMinus1Day.getDate() - 1)
+                      return date < todayMinus1Day
                     }}
                     initialFocus
                   />
@@ -262,8 +232,8 @@ export function EditEventForm({ event }: { event: Event }) {
                   type="file"
                   accept="image/*"
                   onChange={(event) => {
-                    const file = event.target.files && event.target.files[0];
-                    onChange(file);
+                    const file = event.target.files && event.target.files[0]
+                    onChange(file)
                   }}
                 />
               </FormControl>
@@ -282,7 +252,7 @@ export function EditEventForm({ event }: { event: Event }) {
 
         <LoaderButton
           onClick={() => {
-            onSubmit(form.getValues());
+            onSubmit(form.getValues())
           }}
           isLoading={isPending}
         >
@@ -290,5 +260,5 @@ export function EditEventForm({ event }: { event: Event }) {
         </LoaderButton>
       </form>
     </Form>
-  );
+  )
 }

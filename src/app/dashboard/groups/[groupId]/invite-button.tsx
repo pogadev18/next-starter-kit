@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { sendInviteAction } from "@/app/dashboard/groups/[groupId]/actions";
-import { LoaderButton } from "@/components/loader-button";
+import { sendInviteAction } from '@/app/dashboard/groups/[groupId]/actions'
+import { LoaderButton } from '@/components/loader-button'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -10,67 +10,60 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { btnIconStyles, btnStyles } from "@/styles/icons";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { MailIcon } from "lucide-react";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useServerAction } from "zsa-react";
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { btnIconStyles, btnStyles } from '@/styles/icons'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { MailIcon } from 'lucide-react'
+import { useParams } from 'next/navigation'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useServerAction } from 'zsa-react'
 
 export const schema = z.object({
-  email: z.string().email(),
-});
+  email: z.string().email()
+})
 
 export function InviteButton() {
-  const { toast } = useToast();
-  const { groupId } = useParams<{ groupId: string }>();
-  const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast()
+  const { groupId } = useParams<{ groupId: string }>()
+  const [isOpen, setIsOpen] = useState(false)
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-    },
-  });
+      email: ''
+    }
+  })
 
   const { execute: sendInvite, isPending } = useServerAction(sendInviteAction, {
     onSuccess: () => {
-      setIsOpen(false);
-      form.reset();
+      setIsOpen(false)
+      form.reset()
       toast({
-        title: "Invite Sent",
-        description: "Tell your friend to check their email.",
-      });
+        title: 'Invite Sent',
+        description: 'Tell your friend to check their email.'
+      })
     },
     onError: ({ err }) => {
       toast({
-        title: "Error",
-        description: err.message || "Failed to send invite.",
-        variant: "destructive",
-      });
-    },
-  });
+        title: 'Error',
+        description: err.message || 'Failed to send invite.',
+        variant: 'destructive'
+      })
+    }
+  })
 
   function onSubmit(values: z.infer<typeof schema>) {
     sendInvite({
       email: values.email,
-      groupId: parseInt(groupId),
-    });
+      groupId: parseInt(groupId)
+    })
   }
 
   return (
@@ -112,5 +105,5 @@ export function InviteButton() {
         </Form>
       </AlertDialogContent>
     </AlertDialog>
-  );
+  )
 }

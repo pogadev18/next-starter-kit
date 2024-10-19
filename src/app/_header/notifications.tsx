@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   DropdownMenu,
@@ -6,27 +6,23 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Notification } from "@/db/schema";
-import { BellIcon } from "lucide-react";
-import Link from "next/link";
-import { markNotificationAsReadAction } from "./actions";
-import { useServerAction } from "zsa-react";
-import { getNotificationIcon, getNotificationLink } from "@/util/notifications";
-import { useState } from "react";
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Notification } from '@/db/schema'
+import { BellIcon } from 'lucide-react'
+import Link from 'next/link'
+import { markNotificationAsReadAction } from './actions'
+import { useServerAction } from 'zsa-react'
+import { getNotificationIcon, getNotificationLink } from '@/util/notifications'
+import { useState } from 'react'
 
-export function Notifications({
-  notifications,
-}: {
-  notifications: Notification[];
-}) {
-  const [isOpen, setIsOpen] = useState(false);
+export function Notifications({ notifications }: { notifications: Notification[] }) {
+  const [isOpen, setIsOpen] = useState(false)
   const { execute } = useServerAction(markNotificationAsReadAction, {
     onSuccess() {
-      setIsOpen(false);
-    },
-  });
+      setIsOpen(false)
+    }
+  })
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -52,7 +48,7 @@ export function Notifications({
           <DropdownMenuItem key={notification.id} asChild>
             <Link
               onClick={async () => {
-                await execute({ notificationId: notification.id });
+                await execute({ notificationId: notification.id })
               }}
               className="cursor-pointer"
               href={getNotificationLink(notification)}
@@ -68,7 +64,7 @@ export function Notifications({
         <div className="flex justify-center py-4">
           <Link
             onClick={() => {
-              setIsOpen(false);
+              setIsOpen(false)
             }}
             className="text-xs text-blue-400 hover:text-blue-500"
             href="/notifications"
@@ -78,5 +74,5 @@ export function Notifications({
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

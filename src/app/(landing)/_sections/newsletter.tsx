@@ -3,7 +3,7 @@ export function NewsletterSection() {
     <div>
       <form
         action={async (formData: FormData) => {
-          "use server";
+          'use server'
         }}
       >
         <div>
@@ -13,5 +13,5 @@ export function NewsletterSection() {
         <button type="submit">Subscribe</button>
       </form>
     </div>
-  );
+  )
 }

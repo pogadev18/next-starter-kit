@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
 export default async function SettingPage() {
-  redirect(`/dashboard/settings/profile`);
+  redirect(`/dashboard/settings/profile`)
 }

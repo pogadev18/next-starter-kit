@@ -1,29 +1,26 @@
-import { streamImageFromUrl } from "@/app/api/streams";
-import { env } from "@/env";
-import { getCurrentUser } from "@/lib/session";
-import { getGroupImageUrlUseCase } from "@/use-cases/files";
-import { NextResponse } from "next/server";
+import { streamImageFromUrl } from '@/app/api/streams'
+import { env } from '@/env'
+import { getCurrentUser } from '@/lib/session'
+import { getGroupImageUrlUseCase } from '@/use-cases/files'
+import { NextResponse } from 'next/server'
 
-export const GET = async (
-  req: Request,
-  { params }: { params: { groupId: string; imageId: string } }
-) => {
+export const GET = async (req: Request, { params }: { params: { groupId: string; imageId: string } }) => {
   try {
-    const groupId = parseInt(params.groupId);
+    const groupId = parseInt(params.groupId)
 
-    const user = await getCurrentUser();
+    const user = await getCurrentUser()
 
     const url =
-      params.imageId === "default"
+      params.imageId === 'default'
         ? `${env.HOST_NAME}/group.jpeg`
         : await getGroupImageUrlUseCase(user, {
             imageId: params.imageId,
-            groupId,
-          });
+            groupId
+          })
 
-    return streamImageFromUrl(url);
+    return streamImageFromUrl(url)
   } catch (error) {
-    const err = error as Error;
-    return NextResponse.json({ error: err.message }, { status: 400 });
+    const err = error as Error
+    return NextResponse.json({ error: err.message }, { status: 400 })
   }
-};
+}

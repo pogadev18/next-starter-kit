@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
 
 export const env = createEnv({
   server: {
@@ -21,7 +21,7 @@ export const env = createEnv({
     CLOUDFLARE_ACCESS_KEY_ID: z.string().min(1),
     CLOUDFLARE_SECRET_ACCESS_KEY: z.string().min(1),
     CLOUDFLARE_BUCKET_NAME: z.string().min(1),
-    RESEND_AUDIENCE_ID: z.string().min(1),
+    RESEND_AUDIENCE_ID: z.string().min(1)
   },
   client: {
     NEXT_PUBLIC_STRIPE_KEY: z.string().min(1),
@@ -29,7 +29,7 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
     NEXT_PUBLIC_PRICE_ID_BASIC: z.string().min(1),
     NEXT_PUBLIC_PRICE_ID_PREMIUM: z.string().min(1),
-    NEXT_PUBLIC_STRIPE_MANAGE_URL: z.string().min(1),
+    NEXT_PUBLIC_STRIPE_MANAGE_URL: z.string().min(1)
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -56,6 +56,6 @@ export const env = createEnv({
     RESEND_AUDIENCE_ID: process.env.RESEND_AUDIENCE_ID,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    NEXT_PUBLIC_STRIPE_MANAGE_URL: process.env.NEXT_PUBLIC_STRIPE_MANAGE_URL,
-  },
-});
+    NEXT_PUBLIC_STRIPE_MANAGE_URL: process.env.NEXT_PUBLIC_STRIPE_MANAGE_URL
+  }
+})

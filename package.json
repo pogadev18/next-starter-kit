@@ -14,7 +14,8 @@
     "db:studio": "drizzle-kit studio",
     "db:clear": "tsx ./src/db/clear.ts",
     "db:seed": "tsx ./src/db/seed.ts",
-    "db:reset": "npm run db:clear && npm run db:migrate && npm run db:seed"
+    "db:reset": "npm run db:clear && npm run db:migrate && npm run db:seed",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\""
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.587.0",
@@ -98,6 +99,7 @@
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
     "postcss": "8.4.38",
+    "prettier": "^3.3.3",
     "tailwindcss": "3.4.3",
     "tsx": "^4.16.2",
     "typescript": "5.4.5"

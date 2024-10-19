@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { tabStyles } from "@/styles/common";
-import { UserId } from "@/use-cases/types";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { tabStyles } from '@/styles/common'
+import { UserId } from '@/use-cases/types'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function ProfileTabs({ userId }: { userId: UserId }) {
-  const path = usePathname();
-  const tabInUrl = path.includes("/posts") ? "posts" : path.split("/").pop();
+  const path = usePathname()
+  const tabInUrl = path.includes('/posts') ? 'posts' : path.split('/').pop()
 
   return (
     <div className={tabStyles}>
@@ -34,5 +34,5 @@ export function ProfileTabs({ userId }: { userId: UserId }) {
         </Tabs>
       </div>
     </div>
-  );
+  )
 }

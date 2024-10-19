@@ -1,13 +1,10 @@
-import { ComingSoonHeader } from "@/app/(coming-soon)/header";
-import { NewsletterForm } from "@/app/(coming-soon)/newsletter-form";
-import Image from "next/image";
+import { ComingSoonHeader } from '@/app/(coming-soon)/header'
+import { NewsletterForm } from '@/app/(coming-soon)/newsletter-form'
+import Image from 'next/image'
 
 export function Lines() {
   return (
-    <svg
-      className="absolute inset-0 z-10 h-full w-full stroke-slate-100 dark:stroke-slate-800"
-      aria-hidden="true"
-    >
+    <svg className="absolute inset-0 z-10 h-full w-full stroke-slate-100 dark:stroke-slate-800" aria-hidden="true">
       <defs>
         <pattern
           id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
@@ -20,14 +17,9 @@ export function Lines() {
           <path d="M.5 230V.5H230" fill="none"></path>
         </pattern>
       </defs>
-      <rect
-        width="100%"
-        height="100%"
-        strokeWidth="0"
-        fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-      ></rect>
+      <rect width="100%" height="100%" strokeWidth="0" fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"></rect>
     </svg>
-  );
+  )
 }
 
 export function ComingSoon() {
@@ -42,15 +34,12 @@ export function ComingSoon() {
           <div className="grid max-w-screen-xl px-4 pt-12 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-24 lg:grid-cols-12 lg:pt-16">
             <div className="mr-auto place-self-center col-span-7">
               <h1 className="font-semibold max-w-2xl mb-6 text-4xl leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
-                🚀 I&apos;m working on the{" "}
-                <span className="italic text-red-400">perfect</span> SaaS
-                starter kit.
+                🚀 I&apos;m working on the <span className="italic text-red-400">perfect</span> SaaS starter kit.
               </h1>
 
               <h2 className="text-2xl mb-8 font-light">
-                This Next.js starter kit will enable you to setup your own SaaS
-                product with monthly subscriptions, including a complete
-                walkthrough on how to set it all up and maintain it.
+                This Next.js starter kit will enable you to setup your own SaaS product with monthly subscriptions,
+                including a complete walkthrough on how to set it all up and maintain it.
               </h2>
 
               <p className="text-3xl mb-4">Get Notified When I Launch 🚀</p>
@@ -75,22 +64,16 @@ export function ComingSoon() {
 
       <section className="border-slate-400 border-t border-b dark:border-slate-500 relative py-12 dark:bg-gray-950 shadow-sm bg-repeat bg-paper dark:bg-plus">
         <div className="container mx-auto max-w-4xl pt-12 dark:text-gray-200">
-          <h2 className="text-5xl mb-8 font-bold">
-            What I&apos;m working on 🛠️
-          </h2>
+          <h2 className="text-5xl mb-8 font-bold">What I&apos;m working on 🛠️</h2>
 
           <p className="mb-6 text-xl leading-10">
-            For those who watch my channel, you know I work on lot of different
-            side projects. I&apos;ve even lost track how many times I&apos;ve
-            reinstalled the same ShadCN components. To speed up my personal time
-            to launch new products, I&apos;m building a complete starter kit
-            which includes most of everything you&apos;d need when creating a
-            new online SaaS product.
+            For those who watch my channel, you know I work on lot of different side projects. I&apos;ve even lost track
+            how many times I&apos;ve reinstalled the same ShadCN components. To speed up my personal time to launch new
+            products, I&apos;m building a complete starter kit which includes most of everything you&apos;d need when
+            creating a new online SaaS product.
           </p>
 
-          <p className="mb-8 text-xl leading-10">
-            Buckle up, it&apos;s going to be BIG; I plan to include:
-          </p>
+          <p className="mb-8 text-xl leading-10">Buckle up, it&apos;s going to be BIG; I plan to include:</p>
 
           <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 md:mx-12 mb-12">
             <li>🚦 Next.js 14</li>
@@ -117,18 +100,16 @@ export function ComingSoon() {
           </ul>
 
           <p className="mb-6 text-xl leading-10">
-            Additionally, I&apos;m working on a complete walkthrough on how to
-            setup the project including any third party services, hosting, and
-            how to run migrations and add new features, etc.
+            Additionally, I&apos;m working on a complete walkthrough on how to setup the project including any third
+            party services, hosting, and how to run migrations and add new features, etc.
           </p>
 
           <p className="text-xl leading-10 text-center mt-24 mb-24">
-            I don&apos;t want to sell you code. I want to{" "}
-            <strong>teach you</strong> how to build, launch, and iterate on your
-            product. I&apos;m excited to help you build!
+            I don&apos;t want to sell you code. I want to <strong>teach you</strong> how to build, launch, and iterate
+            on your product. I&apos;m excited to help you build!
           </p>
         </div>
       </section>
     </>
-  );
+  )
 }

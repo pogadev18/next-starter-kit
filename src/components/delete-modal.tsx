@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { LoaderButton } from "@/components/loader-button";
+import { LoaderButton } from '@/components/loader-button'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -8,8 +8,8 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  AlertDialogTitle
+} from '@/components/ui/alert-dialog'
 
 export function DeleteModal({
   onConfirm,
@@ -17,16 +17,16 @@ export function DeleteModal({
   title,
   isOpen,
   setIsOpen,
-  confirmText = "Delete",
-  isPending,
+  confirmText = 'Delete',
+  isPending
 }: {
-  onConfirm: () => void;
-  description: string;
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  title: string;
-  confirmText?: string;
-  isPending: boolean;
+  onConfirm: () => void
+  description: string
+  isOpen: boolean
+  setIsOpen: (open: boolean) => void
+  title: string
+  confirmText?: string
+  isPending: boolean
 }) {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -44,5 +44,5 @@ export function DeleteModal({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
+  )
 }

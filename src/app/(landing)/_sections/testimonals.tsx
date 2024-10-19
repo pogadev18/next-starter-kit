@@ -1,3 +1,3 @@
 export function TestimonalsSection() {
-  return <div></div>;
+  return <div></div>
 }

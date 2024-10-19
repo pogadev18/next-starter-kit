@@ -3,14 +3,12 @@ export function DemoSection() {
     <section className="bg-green-900 py-24">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl font-bold max-w-2xl mx-auto mb-8">
-          But wait... you don&apos;t know how to use half the tools I just
-          mentioned?
+          But wait... you don&apos;t know how to use half the tools I just mentioned?
         </h2>
 
         <h3 className="text-2xl mb-8 max-w-2xl mx-auto">
-          Don&apos;t worry, I have experience making over 600 tutorial videos on
-          youtube and this starter kit includes documentation and video
-          walkthroughs. I&apos;ll teach you how to:
+          Don&apos;t worry, I have experience making over 600 tutorial videos on youtube and this starter kit includes
+          documentation and video walkthroughs. I&apos;ll teach you how to:
         </h3>
 
         <ul className="text-xl flex flex-col justify-center items-center gap-4 list-disc mb-12">
@@ -36,5 +34,5 @@ export function DemoSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

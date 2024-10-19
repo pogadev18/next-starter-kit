@@ -1,6 +1,6 @@
-import { Subscription } from "@/db/schema";
+import { Subscription } from '@/db/schema'
 
 export function isSubscriptionActive(subscription?: Subscription) {
-  if (!subscription) return false;
-  return subscription.stripeCurrentPeriodEnd >= new Date();
+  if (!subscription) return false
+  return subscription.stripeCurrentPeriodEnd >= new Date()
 }

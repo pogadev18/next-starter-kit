@@ -1,22 +1,17 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { MoreVertical, PencilIcon, Trash } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { btnIconStyles } from "@/styles/icons";
-import { InteractiveOverlay } from "@/components/interactive-overlay";
-import { Reply } from "@/db/schema";
-import { useState } from "react";
-import { EditReplyForm } from "./edit-reply-form";
-import { useToast } from "@/components/ui/use-toast";
-import { useServerAction } from "zsa-react";
-import { deleteReplyAction } from "./actions";
-import { LoaderButton } from "@/components/loader-button";
+import { Button } from '@/components/ui/button'
+import { MoreVertical, PencilIcon, Trash } from 'lucide-react'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { btnIconStyles } from '@/styles/icons'
+import { InteractiveOverlay } from '@/components/interactive-overlay'
+import { Reply } from '@/db/schema'
+import { useState } from 'react'
+import { EditReplyForm } from './edit-reply-form'
+import { useToast } from '@/components/ui/use-toast'
+import { useServerAction } from 'zsa-react'
+import { deleteReplyAction } from './actions'
+import { LoaderButton } from '@/components/loader-button'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -24,44 +19,39 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  AlertDialogTitle
+} from '@/components/ui/alert-dialog'
 
 export function ReplyActions({ reply }: { reply: Reply }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isEditPostOpen, setIsEditPostOpen] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false)
+  const [isEditPostOpen, setIsEditPostOpen] = useState(false)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const { toast } = useToast()
   const { execute, isPending } = useServerAction(deleteReplyAction, {
     onSuccess() {
       toast({
-        title: "Success",
-        description: "Reply deleted",
-      });
-      setIsDeleteDialogOpen(false);
-    },
-  });
+        title: 'Success',
+        description: 'Reply deleted'
+      })
+      setIsDeleteDialogOpen(false)
+    }
+  })
 
   return (
     <>
       <InteractiveOverlay
-        title={"Edit Reply"}
-        description={"Update the message in your reply"}
+        title={'Edit Reply'}
+        description={'Update the message in your reply'}
         form={<EditReplyForm reply={reply} />}
         isOpen={isEditPostOpen}
         setIsOpen={setIsEditPostOpen}
       />
 
-      <AlertDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-      >
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Reply</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to delete this reply?
-            </AlertDialogDescription>
+            <AlertDialogDescription>Are you sure you want to delete this reply?</AlertDialogDescription>
           </AlertDialogHeader>
 
           <AlertDialogFooter>
@@ -72,8 +62,8 @@ export function ReplyActions({ reply }: { reply: Reply }) {
                 execute({
                   postId: reply.postId,
                   groupId: reply.groupId,
-                  replyId: reply.id,
-                });
+                  replyId: reply.id
+                })
               }}
             >
               Delete Reply
@@ -93,9 +83,9 @@ export function ReplyActions({ reply }: { reply: Reply }) {
           <DropdownMenuItem
             className="flex items-center gap-2"
             onSelect={(e) => {
-              e.preventDefault();
-              setIsEditPostOpen(true);
-              setIsOpen(false);
+              e.preventDefault()
+              setIsEditPostOpen(true)
+              setIsOpen(false)
             }}
           >
             <PencilIcon className={btnIconStyles} /> Edit Reply
@@ -103,9 +93,9 @@ export function ReplyActions({ reply }: { reply: Reply }) {
           <DropdownMenuItem
             className="flex items-center gap-2 text-red-500"
             onSelect={(e) => {
-              e.preventDefault();
-              setIsDeleteDialogOpen(true);
-              setIsOpen(false);
+              e.preventDefault()
+              setIsDeleteDialogOpen(true)
+              setIsOpen(false)
             }}
           >
             <Trash className={btnIconStyles} /> Delete Reply
@@ -113,5 +103,5 @@ export function ReplyActions({ reply }: { reply: Reply }) {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  );
+  )
 }

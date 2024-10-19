@@ -5,27 +5,17 @@ import {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+  PaginationPrevious
+} from '@/components/ui/pagination'
 
-export function GroupPagination({
-  page,
-  totalPages,
-  search,
-}: {
-  page: number;
-  totalPages: number;
-  search: string;
-}) {
+export function GroupPagination({ page, totalPages, search }: { page: number; totalPages: number; search: string }) {
   return (
     <Pagination>
       <PaginationContent>
         {page > 1 && (
           <>
             <PaginationItem>
-              <PaginationPrevious
-                href={`/browse?page=${page - 1}&search=${search}`}
-              />
+              <PaginationPrevious href={`/browse?page=${page - 1}&search=${search}`} />
             </PaginationItem>
 
             {page > 2 && (
@@ -35,10 +25,7 @@ export function GroupPagination({
             )}
 
             <PaginationItem>
-              <PaginationLink
-                isActive={false}
-                href={`/browse?page=${page - 1}&search=${search}`}
-              >
+              <PaginationLink isActive={false} href={`/browse?page=${page - 1}&search=${search}`}>
                 {page - 1}
               </PaginationLink>
             </PaginationItem>
@@ -54,11 +41,7 @@ export function GroupPagination({
         {page < totalPages && (
           <>
             <PaginationItem>
-              <PaginationLink
-                href={`/browse?page=${page + 1}&search=${search}`}
-              >
-                {page + 1}
-              </PaginationLink>
+              <PaginationLink href={`/browse?page=${page + 1}&search=${search}`}>{page + 1}</PaginationLink>
             </PaginationItem>
 
             {page < totalPages - 1 && (
@@ -68,13 +51,11 @@ export function GroupPagination({
             )}
 
             <PaginationItem>
-              <PaginationNext
-                href={`/browse?page=${page + 1}&search=${search}`}
-              />
+              <PaginationNext href={`/browse?page=${page + 1}&search=${search}`} />
             </PaginationItem>
           </>
         )}
       </PaginationContent>
     </Pagination>
-  );
+  )
 }

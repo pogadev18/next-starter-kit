@@ -1,18 +1,12 @@
-"use client";
+'use client'
 
-import { AUTHENTICATION_ERROR_MESSAGE } from "@/app/util";
-import { Button } from "@/components/ui/button";
-import { pageTitleStyles } from "@/styles/common";
-import Link from "next/link";
+import { AUTHENTICATION_ERROR_MESSAGE } from '@/app/util'
+import { Button } from '@/components/ui/button'
+import { pageTitleStyles } from '@/styles/common'
+import Link from 'next/link'
 
-export default function ErrorPage({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
-  const isAuthenticationError = error.message.includes(
-    AUTHENTICATION_ERROR_MESSAGE
-  );
+export default function ErrorPage({ error }: { error: Error & { digest?: string } }) {
+  const isAuthenticationError = error.message.includes(AUTHENTICATION_ERROR_MESSAGE)
 
   return (
     <div className="container mx-auto py-12 min-h-screen space-y-8">
@@ -32,5 +26,5 @@ export default function ErrorPage({
         </>
       )}
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import Confetti from "@/components/confetti";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Confetti from '@/components/confetti'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function SuccessPage() {
   return (
@@ -13,9 +13,9 @@ export default function SuccessPage() {
         <p>Click below to start using our service</p>
 
         <Button asChild>
-          <Link href={"/dashboard"}>View Dashboard</Link>
+          <Link href={'/dashboard'}>View Dashboard</Link>
         </Button>
       </div>
     </>
-  );
+  )
 }

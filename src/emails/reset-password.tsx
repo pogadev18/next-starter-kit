@@ -1,23 +1,11 @@
-import * as React from "react";
+import * as React from 'react'
 
-import {
-  Body,
-  Container,
-  Head,
-  Hr,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Section,
-  Tailwind,
-  Text,
-} from "@react-email/components";
+import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Tailwind, Text } from '@react-email/components'
 
-import { env } from "@/env";
-import { applicationName } from "@/app-config";
+import { env } from '@/env'
+import { applicationName } from '@/app-config'
 
-export const BASE_URL = env.HOST_NAME;
+export const BASE_URL = env.HOST_NAME
 
 export function ResetPasswordEmail({ token }: { token: string }) {
   return (
@@ -29,13 +17,7 @@ export function ResetPasswordEmail({ token }: { token: string }) {
           <Body className="bg-white my-auto mx-auto font-sans">
             <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
               <Section className="mt-[32px]">
-                <Img
-                  src={`${BASE_URL}/group.jpeg`}
-                  width="160"
-                  height="48"
-                  alt="StarterKit"
-                  className="my-0 mx-auto"
-                />
+                <Img src={`${BASE_URL}/group.jpeg`} width="160" height="48" alt="StarterKit" className="my-0 mx-auto" />
               </Section>
 
               <Section className="text-center mt-[32px] mb-[32px]">
@@ -64,5 +46,5 @@ export function ResetPasswordEmail({ token }: { token: string }) {
         </React.Fragment>
       </Tailwind>
     </Html>
-  );
+  )
 }

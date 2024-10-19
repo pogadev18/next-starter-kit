@@ -1,29 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { env } from "@/env";
-import { getCurrentUser } from "@/lib/session";
-import { pageTitleStyles, pageWrapperStyles } from "@/styles/common";
-import { acceptInviteUseCase } from "@/use-cases/invites";
-import { Link } from "@react-email/components";
-import { redirect } from "next/navigation";
+import { Button } from '@/components/ui/button'
+import { env } from '@/env'
+import { getCurrentUser } from '@/lib/session'
+import { pageTitleStyles, pageWrapperStyles } from '@/styles/common'
+import { acceptInviteUseCase } from '@/use-cases/invites'
+import { Link } from '@react-email/components'
+import { redirect } from 'next/navigation'
 
 export default async function InvitesPage({
-  params,
+  params
 }: {
   params: {
-    token: string;
-  };
+    token: string
+  }
 }) {
-  const { token } = params;
+  const { token } = params
 
   if (!token) {
-    throw new Error("Invalid invite link");
+    throw new Error('Invalid invite link')
   }
 
-  const user = await getCurrentUser();
+  const user = await getCurrentUser()
 
   if (user) {
-    const groupId = await acceptInviteUseCase(user, { token });
-    redirect(`/dashboard/groups/${groupId}`);
+    const groupId = await acceptInviteUseCase(user, { token })
+    redirect(`/dashboard/groups/${groupId}`)
   }
 
   return (
@@ -32,19 +32,14 @@ export default async function InvitesPage({
         <>
           <h1 className={pageTitleStyles}>Processing Invites</h1>
           <p className="max-w-md text-lg">
-            Someone sent you an invite, but you need to first login to accept
-            it. Click the button below to get started.
+            Someone sent you an invite, but you need to first login to accept it. Click the button below to get started.
           </p>
 
           <Button asChild>
-            <Link
-              href={`/sign-in?callbackUrl=${env.HOST_NAME}/invites/${token}`}
-            >
-              Login to Accept Invite
-            </Link>
+            <Link href={`/sign-in?callbackUrl=${env.HOST_NAME}/invites/${token}`}>Login to Accept Invite</Link>
           </Button>
         </>
       )}
     </div>
-  );
+  )
 }

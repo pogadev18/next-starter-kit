@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export default async function DashboardLayout({
-  children,
+  children
 }: Readonly<{
-  children: ReactNode;
+  children: ReactNode
 }>) {
-  return <div>{children}</div>;
+  return <div>{children}</div>
 }

@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { LoaderButton } from "@/components/loader-button";
+import { LoaderButton } from '@/components/loader-button'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,28 +9,28 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { useServerAction } from "zsa-react";
-import { clearReadNotificationsAction } from "./actions";
-import { useToast } from "@/components/ui/use-toast";
-import { TrashIcon } from "lucide-react";
-import { btnIconStyles, btnStyles } from "@/styles/icons";
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { useServerAction } from 'zsa-react'
+import { clearReadNotificationsAction } from './actions'
+import { useToast } from '@/components/ui/use-toast'
+import { TrashIcon } from 'lucide-react'
+import { btnIconStyles, btnStyles } from '@/styles/icons'
 
 export function ClearReadButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
+  const [isOpen, setIsOpen] = useState(false)
+  const { toast } = useToast()
   const { execute, isPending } = useServerAction(clearReadNotificationsAction, {
     onSuccess: () => {
       toast({
-        title: "Success",
-        description: "Read messages were cleared.",
-      });
-      setIsOpen(false);
-    },
-  });
+        title: 'Success',
+        description: 'Read messages were cleared.'
+      })
+      setIsOpen(false)
+    }
+  })
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -43,8 +43,7 @@ export function ClearReadButton() {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently clear all your read notifications from the
-            system.
+            This will permanently clear all your read notifications from the system.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -52,7 +51,7 @@ export function ClearReadButton() {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <LoaderButton
             onClick={() => {
-              execute();
+              execute()
             }}
             isLoading={isPending}
           >
@@ -61,5 +60,5 @@ export function ClearReadButton() {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
+  )
 }

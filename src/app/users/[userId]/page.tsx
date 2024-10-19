@@ -1,9 +1,5 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
-export default async function ProfilePage({
-  params,
-}: {
-  params: { userId: string };
-}) {
-  redirect(`/users/${params.userId}/info`);
+export default async function ProfilePage({ params }: { params: { userId: string } }) {
+  redirect(`/users/${params.userId}/info`)
 }
